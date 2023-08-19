@@ -54,6 +54,22 @@ module.exports = {
         } catch (error) {
             res.status(500).json(error);
         }
+    },
+    async editThought(req, res){
+        try {
+            console.log(req.params)
+            const update = await Thoughts.findByIdAndUpdate(
+                {_id: req.params.thoughtId},
+                {$set: req.body},
+                {runValidators: true, new: true}
+            )
+
+            console.log(update);
+
+            res.json(update)
+        } catch (error) {
+            res.status(500).json(error);
+        }
     }
 
 }
