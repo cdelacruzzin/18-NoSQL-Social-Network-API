@@ -17,5 +17,14 @@ module.exports = {
         } catch (error) {
             res.status(500).json(error);
         }
+    },
+    async getSingleUser(req, res){
+        try {
+            console.log(req.params);
+            const user = await User.findById(req.params.userId);
+            res.json(user);
+        } catch (error) {
+            res.status(500).json(error);
+        }
     }
 }
