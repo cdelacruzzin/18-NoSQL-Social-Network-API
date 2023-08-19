@@ -28,5 +28,22 @@ module.exports = {
         } catch (error) {
             res.status(500).json(error);
         }
+    },
+    async getAllThoughts(req,res){
+        try {
+            const thoughts = await Thoughts.find()
+            .select('-__v'); //ignores the version field
+            res.json(thoughts);
+        } catch (error) {
+            res.status(500).json(error);
+        }
+    },
+    async deleteAll(req,res){   //deletes all thoughts
+        try {
+            const deleteThoughts = await Thoughts.deleteMany();
+            res.json(deleteThoughts);
+        } catch (error) {
+            res.status(500).json(error);
+        }
     }
 }
