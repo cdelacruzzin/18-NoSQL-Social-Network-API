@@ -1,4 +1,4 @@
-const {Schema, model} = require('mongoose');
+const { Schema, model } = require('mongoose');
 const { isEmail } = require('validator'); //imports email validator
 
 
@@ -42,3 +42,5 @@ userSchema.virtual('friendCount')
 })
 
 const User = model('user', userSchema);
+
+module.exports = User;
