@@ -3,7 +3,7 @@ const { User, Thoughts } = require('../models');
 module.exports = {
 
     async createThought(req, res) {
-        console.log(req.body)
+        // console.log(req.body)
         try {
 
 
@@ -15,7 +15,7 @@ module.exports = {
                 {new: true}
             )
 
-            console.log(user);
+            // console.log(user);
          
             
             if (!user) {
@@ -45,5 +45,15 @@ module.exports = {
         } catch (error) {
             res.status(500).json(error);
         }
+    },
+    async deleteSingle(req,res){
+        console.log(req.params)
+        try {
+            const deleteThought = await Thoughts.findByIdAndDelete(req.params.thoughtId);
+            res.json(deleteThought);
+        } catch (error) {
+            res.status(500).json(error);
+        }
     }
+
 }
