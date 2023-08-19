@@ -1,5 +1,5 @@
 const User = require('./User');
-const thoughts = require('./Thought');
-module.exports = {User, thoughts};
+const Thoughts = require('./Thought');
+module.exports = {User, Thoughts};
 
 //model index to require Users and Thoughts
