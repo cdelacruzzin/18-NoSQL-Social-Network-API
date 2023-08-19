@@ -13,9 +13,10 @@ module.exports = {
                 {_id: req.params.userId},
                 {$addToSet: {thoughts: thought._id}},
                 {new: true}
-            );
-            console.log(user);
+            )
 
+            console.log(user);
+         
             
             if (!user) {
                 return res.status(404).json({

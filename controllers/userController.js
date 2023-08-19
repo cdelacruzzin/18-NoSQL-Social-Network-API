@@ -21,7 +21,8 @@ module.exports = {
     async getSingleUser(req, res){
         try {
             console.log(req.params);
-            const user = await User.findById(req.params.userId);
+            const user = await User.findById(req.params.userId)
+            .populate('thoughts'); //populates the user with the thoughts
             res.json(user);
         } catch (error) {
             res.status(500).json(error);
