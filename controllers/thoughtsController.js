@@ -5,8 +5,6 @@ module.exports = {
     async createThought(req, res) {
         // console.log(req.body)
         try {
-
-
             const thought = await Thoughts.create(req.body);
             console.log(thought);
             const user = await User.findByIdAndUpdate(
@@ -69,6 +67,15 @@ module.exports = {
             res.json(update)
         } catch (error) {
             res.status(500).json(error);
+        }
+    },
+    async getSingleThought(req, res){
+        try {
+            const thought = await Thoughts.findById(req.params.thoughtId);
+
+            res.json(thought)
+        } catch (error) {
+            res.status(500).json(error);  
         }
     }
 
