@@ -3,14 +3,19 @@ module.exports = {
 
     async getUsers(req, res){
         try {
-            res.json('ho')
             const users = await User.find();
+            res.json(users);
+        } catch (error) {
+            res.status(500).json(error);
+        }
+    },
+    async createUser(req,res){
+        try {
+            const user = await User.create(req.body);
+
+            res.json(user);
         } catch (error) {
             res.status(500).json(error);
         }
     }
-
-
-
-
 }
