@@ -13,9 +13,6 @@ module.exports = {
                 {new: true}
             )
 
-            // console.log(user);
-         
-            
             if (!user) {
                 return res.status(404).json({
                   message: 'Video created, but found no user with that ID',
@@ -36,23 +33,36 @@ module.exports = {
             res.status(500).json(error);
         }
     },
-    async deleteAll(req,res){   //deletes all thoughts
+    async addReaction(req,res){
         try {
-            const deleteThoughts = await Thoughts.deleteMany();
-            res.json(deleteThoughts);
+            const thought = await Thoughts.findByIdAndUpdate(
+                {_id: req.params.thoughtId},
+                {$addToSet: {reactions: req.body}},
+                {new: true}
+            )
+            console.log(thought);
+            res.json(thought);
         } catch (error) {
             res.status(500).json(error);
         }
     },
-    async deleteSingle(req,res){
-        console.log(req.params)
+
+
+    async deleteReaction(req,res){
         try {
-            const deleteThought = await Thoughts.findByIdAndDelete(req.params.thoughtId);
-            res.json(deleteThought);
+            const thought = await Thoughts.findByIdAndUpdate(
+                {_id: req.params.thoughtId},
+                {$pull: {reactions: {reactionId: req.params.reactionId}}},
+                {new: true}
+            )
+            console.log(thought);
+            res.json(thought);
         } catch (error) {
             res.status(500).json(error);
         }
     },
+
+
     async editThought(req, res){
         try {
             console.log(req.params)
