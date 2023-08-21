@@ -29,8 +29,10 @@ module.exports = {
         } catch (error) {
             res.status(500).json(error);
         }
-    },
-    async addFriend(req,res){
+    }, 
+    //adds friend to userId in params.
+    //adds an objectId to the friends field in User model
+    async addFriend(req,res){  
         console.log(req.params);
         console.log(req.body);
         try {
