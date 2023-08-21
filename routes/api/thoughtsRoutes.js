@@ -6,11 +6,14 @@ const {
     addReaction,
     editThought,
     getSingleThought,
-    deleteReaction
+    deleteReaction,
+    deleteSinglethought,
+    deleteAll
+
 } = require('../../controllers/thoughtsController');
 
 router.route('/').get(getAllThoughts);
 router.route('/:userId').post(createThought);
-router.route('/id/:thoughtId').put(editThought).get(getSingleThought).post(addReaction);
+router.route('/id/:thoughtId').put(editThought).get(getSingleThought).post(addReaction).delete(deleteSinglethought);
 router.route('/:thoughtId/reactions/:reactionId').delete(deleteReaction);
 module.exports = router;

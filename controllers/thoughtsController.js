@@ -87,6 +87,23 @@ module.exports = {
         } catch (error) {
             res.status(500).json(error);  
         }
-    }
+    },
+    async deleteAll(req,res){   //deletes all thoughts
+        try {
+            const deleteThoughts = await Thoughts.deleteMany();
+            res.json(deleteThoughts);
+        } catch (error) {
+            res.status(500).json(error);
+        }
+    },
+    async deleteSinglethought(req,res){
+        console.log(req.params)
+        try {
+            const deleteThought = await Thoughts.findByIdAndDelete(req.params.thoughtId);
+            res.json(deleteThought);
+        } catch (error) {
+            res.status(500).json(error);
+        }
+    },
 
 }
