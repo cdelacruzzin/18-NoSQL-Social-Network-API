@@ -20,6 +20,22 @@ module.exports = {
             res.status(500).json(error);
         }
     },
+    async deleteAllUser(req, res){
+        try {
+            const deleteUser = await User.deleteMany();
+            res.json(deleteUser);
+        } catch (error) {
+            res.status(500).json(error);  
+        }
+    },
+    async deleteOneUser(req, res){
+        try {
+            const deleteUser = await User.findByIdAndDelete(req.params.userId);
+            res.json(deleteUser);
+        } catch (error) {
+            res.status(500).json(error);  
+        }
+    },
     async getSingleUser(req, res){  //gets a single user by id
         try {
             console.log(req.params);
@@ -49,7 +65,15 @@ module.exports = {
     },
     async removeFriend(req, res){
         try {
-            
+            console.log(req.params);
+            console.log(req.body);
+            const removeFriend = await User.findByIdAndUpdate(
+                {_id: req.params.userId},
+                {$pull: {friends: req.params.friendId}},
+                {new:true}
+            )
+
+            res.json(removeFriend);
         } catch (error) {
             res.status(500).json(error); 
         }
